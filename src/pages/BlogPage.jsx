@@ -2,17 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function BlogPage() {
-  const [blogs, setBlogs] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  // 兜底博客数据（防止后端冷启动时为空）
+  // 优质兜底博客数据
   const defaultBlogs = [
     {
       _id: '1',
       title: '深入浅出现代 Web 架构：从单体到前后端分离与微服务',
       content: '本文探讨了现代 Web 工程中前端 SPA 架构、RESTful API 设计范式与无状态 JWT 鉴权的实践落地经验...',
       createdAt: new Date().toISOString(),
-      author: '叶盛',
+      author: '叶胜',
     },
     {
       _id: '2',
@@ -23,15 +20,25 @@ export default function BlogPage() {
     },
   ];
 
+  const [blogs, setBlogs] = useState(defaultBlogs);
+
   useEffect(() => {
-    fetch('https://capstone-api-yes670.onrender.com/api/blogs')
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3000);
+
+    fetch('https://capstone-api-yes670.onrender.com/api/blogs', { signal: controller.signal })
       .then((res) => res.json())
       .then((data) => {
-        if (Array.isArray(data) && data.length > 0) setBlogs(data);
-        else setBlogs(defaultBlogs);
+        if (Array.isArray(data) && data.length > 0) {
+          setBlogs(data);
+        }
       })
-      .catch(() => setBlogs(defaultBlogs))
-      .finally(() => setLoading(false));
+      .catch(() => {
+        // 请求失败或超时使用 defaultBlogs
+      })
+      .finally(() => {
+        clearTimeout(timeoutId);
+      });
   }, []);
 
   return (
@@ -54,15 +61,12 @@ export default function BlogPage() {
               {blog.content}
             </p>
             <div className="flex items-center justify-between text-xs text-gray-500">
-              <span>作者：{blog.author || '叶盛'}</span>
+              <span>作者：{blog.author || '叶胜'}</span>
               <span>{new Date(blog.createdAt).toLocaleDateString('zh-CN')}</span>
             </div>
           </article>
         ))}
       </div>
-    </div>
-  );
-}
     </div>
   );
 }
