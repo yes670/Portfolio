@@ -30,9 +30,9 @@
                      ▼
 [ 云端数据库：MongoDB Atlas 分布式集群 ]
 
----
+```
 
-##  🌟 核心技术亮点
+## 🌟 核心技术亮点
 
 1. **现代化组件驱动与 SPA 架构**
    - 前端基于 **React 18 + Vite** 构建，采用模块化与组件化设计思想，极大提升代码复用率。
@@ -49,19 +49,19 @@
 4. **跨端自适应与多云自动化部署**
    - 结合 **Tailwind CSS** 栅格系统，实现移动端、平板与 PC 桌面端的 100% 响应式布局自适应。
    - 前端通过 **Vercel** 实现 Git 提交触发的自动化构建与边缘 CDN 极速加速；后端微服务容器化托管于 **Render**，数据库直连 **MongoDB Atlas**。
+     
 
 ## 🛠️ 本地运行指南
 
-# 1. 克隆代码仓库到本地
+1. 克隆代码仓库到本地
 git clone https://github.com/yes670/Portfolio.git
 cd Portfolio
 
-# 2. 安装项目依赖
+2. 安装项目依赖
 npm install
 
-# 3. 配置环境变量 (.env)
+3. 配置环境变量 (.env)
 echo "VITE_API_URL=https://capstone-api-yes670.onrender.com/api" > .env
 
-# 4. 启动本地前端开发服务
+4. 启动本地前端开发服务
 npm run dev
-
