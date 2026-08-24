@@ -11,7 +11,7 @@ export default function Header() {
     <header className="bg-gray-800 text-white shadow-md sticky top-0 z-50">
       <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
         <Link to="/" className="text-2xl font-bold hover:text-cyan-400 transition-colors">
-          My Portfolio
+          全栈数字内容平台
         </Link>
         <div className="hidden md:flex items-center space-x-6 text-lg">
           <NavLink to="/" /* ... */>Home</NavLink>
