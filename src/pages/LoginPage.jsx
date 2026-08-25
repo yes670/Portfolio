@@ -1,6 +1,5 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext'; // 引入全局鉴权状态
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -8,7 +7,6 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const authContext = useContext(AuthContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -25,17 +23,12 @@ export default function LoginPage() {
       const data = await res.json();
 
       if (res.ok) {
-        // 1. 保存 Token
+        // 保存 Token 和用户信息
         const token = data.token || (data.user && data.user.token);
         if (token) localStorage.setItem('token', token);
         if (data.user) localStorage.setItem('user', JSON.stringify(data.user));
 
-        // 2. 如果项目使用了 Context，同步更新状态
-        if (authContext && authContext.login) {
-          authContext.login(data.user, token);
-        }
-
-        // 3. 跳转到管理后台
+        // 直接跳转进入管理后台
         navigate('/admin');
       } else {
         setError(data.message || '登录失败，请检查邮箱或密码');
@@ -51,7 +44,7 @@ export default function LoginPage() {
     <div className="max-w-md mx-auto py-20 px-4">
       <div className="bg-gray-800/50 p-8 rounded-2xl border border-gray-800 shadow-xl">
         <h1 className="text-2xl font-bold text-white text-center mb-6">系统身份认证</h1>
-        
+
         {error && (
           <div className="p-3 mb-4 text-xs text-red-400 bg-red-500/10 rounded-lg border border-red-500/20">
             {error}
@@ -93,7 +86,10 @@ export default function LoginPage() {
         </form>
 
         <p className="text-center text-xs text-gray-400 mt-5">
-          尚未注册账号？ <Link to="/register" className="text-blue-400 hover:underline">立即注册</Link>
+          尚未注册账号？{' '}
+          <Link to="/register" className="text-blue-400 hover:underline">
+            立即注册
+          </Link>
         </p>
       </div>
     </div>
