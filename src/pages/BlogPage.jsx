@@ -9,14 +9,14 @@ export default function BlogPage() {
       title: '深入浅出现代 Web 架构：从单体到前后端分离与微服务',
       content: '本文探讨了现代 Web 工程中前端 SPA 架构、RESTful API 设计范式与无状态 JWT 鉴权的实践落地经验...',
       createdAt: new Date().toISOString(),
-      author: '叶胜',
+      author: '叶盛',
     },
     {
       _id: '2',
       title: '基于 React 18 的首屏渲染与路由级代码分割性能优化',
       content: '分析 Web 性能核心指标（LCP、FCP），并结合 React.lazy、Suspense 与 CDN 边缘缓存进行全链路性能优化实战...',
       createdAt: new Date().toISOString(),
-      author: '叶胜',
+      author: '叶盛',
     },
   ];
 
