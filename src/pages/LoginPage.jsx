@@ -28,7 +28,7 @@ export default function LoginPage() {
         if (token) localStorage.setItem('token', token);
         if (data.user) localStorage.setItem('user', JSON.stringify(data.user));
 
-        // 直接跳转进入管理后台
+        // 直接跳转到管理后台
         navigate('/admin');
       } else {
         setError(data.message || '登录失败，请检查邮箱或密码');
